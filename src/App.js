@@ -1,14 +1,16 @@
-import "./App.css";
-
 function App() {
-  const handle = () => {};
+  const handle = (e) => {};
+
+  const handle2 = () => {
+    console.log("Sdasd");
+  };
   return (
-    <div className="App">
+    <div>
       <div>ja pierodle</div>
 
       <h1>sdasdasd</h1>
 
-      <button onClick={() => handle()} />
+      <button onClick={(e) => handle(e)} />
     </div>
   );
 }
