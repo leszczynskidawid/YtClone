@@ -1,9 +1,7 @@
 import "./App.css";
 
 function App() {
-  const handle = () => {
-    console.log("Sdasd");
-  };
+  const handle = () => {};
   return (
     <div className="App">
       <div>ja pierodle</div>
