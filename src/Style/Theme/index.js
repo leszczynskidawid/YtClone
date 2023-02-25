@@ -1,20 +1,43 @@
-import { ThemeProvider } from "styled-components";
+import { createTheme } from "@mui/material/styles";
 
-const theme = {
-  colors: {
-    powderWhite: "#FFFDF9",
-    persianGreen: "#06B49A",
-    lightBlue: "#AFDBD2",
-    onyx: "#36313D",
-  },
-  fonts: ["sans-serif", "Roboto"],
-  fontSizes: {
-    small: "1em",
-    medium: "2em",
-    large: "3em",
-  },
+export const Colors = {
+  powderWhite: "#FFFDF9",
+  persianGreen: "#06B41A",
+  lightBlue: "#FFFFFF",
+  onyx: "#36313D",
+  red: "#F00",
+  blue: "#3EA6FF",
 };
 
-export const Theme = ({ children }) => (
-  <ThemeProvider theme={theme}>{children}</ThemeProvider>
-);
+export const theme = createTheme({
+  palette: {
+    primary: {
+      main: Colors.lightBlue,
+    },
+    secondary: {
+      main: Colors.onyx,
+    },
+    error: {
+      main: Colors.red,
+    },
+    info: {
+      main: Colors.blue,
+    },
+  },
+  components: {
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+        disableElevation: true,
+      },
+    },
+  },
+  breakpoints: {
+    values: {
+      mobile: 0,
+      tablet: 640,
+      laptop: 1024,
+      desktop: 1200,
+    },
+  },
+});

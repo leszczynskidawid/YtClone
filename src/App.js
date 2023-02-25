@@ -1,11 +1,14 @@
 import React from "react";
-import { Theme } from "./Style/Theme";
+import { Navbar } from "./Components/Navbar";
+import { theme } from "./Style/Theme";
+import { ThemeProvider } from "@mui/material";
+import { SearchInput } from "./Components/SearchInput";
 
 const App = () => {
   return (
-    <Theme>
-      <div>hello world</div>
-    </Theme>
+    <ThemeProvider theme={theme}>
+      <Navbar />
+    </ThemeProvider>
   );
 };
 export default App;
