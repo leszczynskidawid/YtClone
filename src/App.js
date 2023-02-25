@@ -1,17 +1,11 @@
+import React from "react";
 import { Theme } from "./Style/Theme";
-function App() {
-  const handle = (e) => {};
 
+const App = () => {
   return (
     <Theme>
-      <div>
-        <div>ja pierodle</div>
-        <h1>sdasdasd</h1>
-        <button onClick={(e) => handle(e)} />
-        <p>sdas</p>
-      </div>
+      <div>hello world</div>
     </Theme>
   );
-}
-
+};
 export default App;
