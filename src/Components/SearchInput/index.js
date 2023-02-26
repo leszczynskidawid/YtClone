@@ -4,28 +4,36 @@ import SearchIcon from "@mui/icons-material/Search";
 import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import { IconButton } from "@mui/material";
-
 import { InputAdornment } from "@mui/material";
+import { styled } from "@mui/system";
+import { Borders, theme } from "../../Style/Theme";
 
-export const SearchInput = ({ matches }) => {
-  const [showClearIcon, setShowClearIcon] = useState("none");
+const SearchInputContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  flex: 2;
+  max-width: 700px;
+  overflow: hidden;
+`;
+const SearchButtonContainer = styled(Box)`
+  background-color: ${theme.palette.grey.main};
+  width: 5rem;
+  text-align: center;
+  border-radius: 0 ${Borders.borderRadius.normal} ${Borders.borderRadius.normal}
+    0;
+`;
+
+export const SearchInput = ({ matches, openSerchInput }) => {
+  const [showClearIcon, setShowClearIcon] = useState(false);
   const [isFous, setIsFocus] = useState(false);
   const handleChange = (e) => {
-    setShowClearIcon(e.target.value === "" ? "none" : "flex");
+    setShowClearIcon(e.target.value === "" ? false : true);
   };
 
   return (
     <>
       {!matches ? (
-        <Box
-          style={{
-            display: "flex",
-            overflow: "hidden",
-            alignItems: "center",
-            flex: 2,
-            maxWidth: "700px",
-          }}
-        >
+        <SearchInputContainer>
           <BasicInput
             placeholder={"szukaj"}
             type={"text"}
@@ -34,35 +42,25 @@ export const SearchInput = ({ matches }) => {
             onBlur={() => setIsFocus(false)}
             InputProps={{
               startAdornment: (
-                <InputAdornment position="end" style={{ color: "white" }}>
+                <InputAdornment position="start">
                   {isFous && <SearchIcon />}
                 </InputAdornment>
               ),
               endAdornment: (
-                <InputAdornment
-                  position="end"
-                  style={{ display: showClearIcon, color: "white" }}
-                >
-                  <ClearIcon />
+                <InputAdornment position="end">
+                  {showClearIcon && <ClearIcon />}
                 </InputAdornment>
               ),
             }}
           />
-          <div
-            style={{
-              background: "grey",
-              width: "5rem",
-              textAlign: "center",
-              borderRadius: "0px 20px 20px 0px",
-            }}
-          >
+          <SearchButtonContainer>
             <IconButton>
               <SearchIcon color="primary" />
             </IconButton>
-          </div>
-        </Box>
+          </SearchButtonContainer>
+        </SearchInputContainer>
       ) : (
-        <IconButton onClick={() => console.log("ustaw state navabra na true")}>
+        <IconButton onClick={openSerchInput}>
           <SearchIcon color="primary" />
         </IconButton>
       )}

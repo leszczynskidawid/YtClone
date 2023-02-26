@@ -7,6 +7,7 @@ export const Colors = {
   onyx: "#36313D",
   red: "#F00",
   blue: "#3EA6FF",
+  grey: "#FFFFFF14",
 };
 
 export const theme = createTheme({
@@ -23,12 +24,22 @@ export const theme = createTheme({
     info: {
       main: Colors.blue,
     },
+    grey: {
+      main: Colors.grey,
+    },
   },
   components: {
     MuiButton: {
       defaultProps: {
         disableRipple: true,
         disableElevation: true,
+      },
+    },
+    MuiInputAdornment: {
+      styleOverrides: {
+        root: {
+          color: Colors.lightBlue,
+        },
       },
     },
   },
@@ -41,3 +52,13 @@ export const theme = createTheme({
     },
   },
 });
+
+export const Borders = {
+  border: {
+    standartDarkMode: `.5px solid ${theme.palette.grey.main}`,
+    standartligthMode: ` .5px solid ${theme.palette.secondary.main} `,
+  },
+  borderRadius: {
+    normal: "20px",
+  },
+};

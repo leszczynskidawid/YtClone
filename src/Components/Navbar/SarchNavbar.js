@@ -1,14 +1,15 @@
 import { SearchInput } from "../SearchInput";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
-import { LoginButton } from "../LoginButton";
-import { Box } from "@mui/system";
+import { AppBarContainer } from "./Style/style";
+import { IconButton } from "@mui/material";
 
-export const SarchNavbar = () => {
+export const SarchNavbar = ({ closeAction }) => {
   return (
-    <Box>
-      <ArrowBackIcon />
+    <AppBarContainer>
+      <IconButton onClick={closeAction}>
+        <ArrowBackIcon color="primary" />
+      </IconButton>
       <SearchInput />
-      <LoginButton />
-    </Box>
+    </AppBarContainer>
   );
 };

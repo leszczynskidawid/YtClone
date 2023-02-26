@@ -4,15 +4,14 @@ const AppBarContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border: 1px solid;
-  border: none;
+  min-height: 90px;
   margin-top: 0.5rem;
+  gap: 20px;
 `;
 const AppBarFragmentsContainer = styled(Box)`
   display: flex;
   justify-content: space-between;
-  min-width: 9rem;
   align-items: center;
-  padding: 0 20px;
+  gap: 10px;
 `;
 export { AppBarContainer, AppBarFragmentsContainer };

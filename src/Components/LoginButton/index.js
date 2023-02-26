@@ -1,29 +1,22 @@
 import { Box } from "@mui/system";
-import { IconButton } from "@mui/material";
+import { IconButton, styled } from "@mui/material";
 import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-export const LoginButton = () => {
-  return (
-    <Box
-      sx={{
-        display: "flex",
-        alignItems: "center",
-        border: "1px solid white",
-        borderRadius: "40px",
-      }}
-    >
-      <IconButton
-        color="info"
-        sx={{
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          padding: "5px 10px",
-        }}
-      >
-        <AccountCircleOutlinedIcon />
+import { Borders } from "../../Style/Theme";
 
-        <span style={{ fontSize: "20px" }}>Zaloguj się</span>
+const SLoginButtonContainer = styled(Box)`
+  display: flex;
+  align-items: center;
+  border: ${Borders.border.standartDarkMode};
+  border-radius: ${Borders.borderRadius.normal};
+`;
+
+export const LoginButton = ({ action }) => {
+  return (
+    <SLoginButtonContainer>
+      <IconButton onClick={action} color="info">
+        <AccountCircleOutlinedIcon />
+        <Box component={"span"}>Zaloguj się</Box>
       </IconButton>
-    </Box>
+    </SLoginButtonContainer>
   );
 };
