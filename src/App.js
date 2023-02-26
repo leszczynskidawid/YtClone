@@ -1,16 +1,11 @@
-import "./App.css";
+import React from "react";
+import { Theme } from "./Style/Theme";
 
-function App() {
-  const handle = () => {};
+const App = () => {
   return (
-    <div className="App">
-      <div>ja pierodle</div>
-
-      <h1>sdasdasd</h1>
-
-      <button onClick={() => handle()} />
-    </div>
+    <Theme>
+      <div>hello world</div>
+    </Theme>
   );
-}
-
+};
 export default App;
