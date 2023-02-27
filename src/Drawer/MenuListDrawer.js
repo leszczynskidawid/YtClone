@@ -5,6 +5,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemButtonShowMoreLess } from "./ListItemButtonShowMoreLess";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const MenuListDrawer = ({ list, displayMenuqtyStart = 1 }) => {
   const [showMore, setShowMore] = useState(false);
@@ -22,7 +23,7 @@ export const MenuListDrawer = ({ list, displayMenuqtyStart = 1 }) => {
   return (
     <List>
       {list?.slice(0, menuItems).map((item) => (
-        <ListItem key={item.id} disablePadding>
+        <ListItem key={item.id} disablePadding to={item.path} component={Link}>
           <ListItemButton>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText primary={item.text} />
