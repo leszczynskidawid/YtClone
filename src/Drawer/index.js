@@ -15,10 +15,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import SubscriptionsIcon from "@mui/icons-material/Subscriptions";
 import HomeIcon from "@mui/icons-material/Home";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
+import ImageListItem from "@mui/material/ImageListItem";
 import { MenuListDrawer } from "./MenuListDrawer";
 import LibraryMusicIcon from "@mui/icons-material/LibraryMusic";
 import HistoryIcon from "@mui/icons-material/History";
@@ -28,13 +27,54 @@ import ContentCutOutlinedIcon from "@mui/icons-material/ContentCutOutlined";
 import QueueMusicOutlinedIcon from "@mui/icons-material/QueueMusicOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import SlowMotionVideoIcon from "@mui/icons-material/SlowMotionVideo";
-import { Avatrs } from "../assets/avatars/acatars";
+import { Avatrs } from "../assets/avatars/avatars";
+const ItemMenuSectioSubscribe = [
+  { id: 1, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
+  { id: 2, text: "Wolski o wojnie", icon: Avatrs.wolski },
+  { id: 3, text: "Strategy and future", icon: Avatrs.future },
+  { id: 4, text: "Historia bez cenzury", icon: Avatrs.historiaBezCenzury },
+  { id: 5, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
+  { id: 6, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
+];
+
+const ItemMenuFirstSection = [
+  { id: 1, text: "Główna", icon: <HomeIcon /> },
+  { id: 2, text: "Shorts", icon: <InboxIcon /> },
+  { id: 3, text: "Subskryubcje", icon: <SubscriptionsIcon /> },
+];
+const ItemMenuSecondSection = [
+  { id: 1, text: "Biblioteka", icon: <LibraryMusicIcon /> },
+  { id: 2, text: "Histora", icon: <HistoryIcon /> },
+  { id: 3, text: "Twoje filmy", icon: <CameraIndoorOutlinedIcon /> },
+  { id: 4, text: "Do obejrzenia", icon: <WatchLaterOutlinedIcon /> },
+  { id: 5, text: "Twoje klipy", icon: <ContentCutOutlinedIcon /> },
+  { id: 6, text: "Polubione filmy", icon: <ThumbUpAltOutlinedIcon /> },
+  {
+    id: 7,
+    text: "CRQueue",
+    icon: <QueueMusicOutlinedIcon />,
+  },
+  {
+    id: 8,
+    text: "Moja",
+    icon: <QueueMusicOutlinedIcon />,
+  },
+  {
+    id: 9,
+    text: "Składanka",
+    icon: <SlowMotionVideoIcon />,
+  },
+];
 
 const drawerWidth = 240;
 
-const openedMixin = () => ({
+const openedMixin = (theme) => ({
   width: drawerWidth,
   overflowX: "hidden",
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
 });
 
 const closedMixin = (theme) => ({
@@ -43,6 +83,10 @@ const closedMixin = (theme) => ({
   [theme.breakpoints.up("tablet")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
+  transition: theme.transitions.create("width", {
+    easing: theme.transitions.easing.sharp,
+    duration: theme.transitions.duration.enteringScreen,
+  }),
 });
 const SDrawer = styled(Drawer, {
   shouldForwardProp: (prop) => prop !== "open",
@@ -66,22 +110,22 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
   zIndex: theme.zIndex.drawer + 1,
 }));
-const AppBar = styled(MuiAppBar, {
-  shouldForwardProp: (prop) => prop !== "open",
-})(({ theme, open }) => ({
-  zIndex: theme.zIndex.drawer + 1,
-  transition: theme.transitions.create(["width", "margin"], {
-    easing: theme.transitions.easing.sharp,
-    duration: theme.transitions.duration.leavingScreen,
-  }),
-  ...(open && {
-    zIndex: theme.zIndex.drawer + 1,
-    transition: theme.transitions.create(["width", "margin"], {
-      easing: theme.transitions.easing.sharp,
-      duration: theme.transitions.duration.enteringScreen,
-    }),
-  }),
-}));
+// const AppBar = styled(MuiAppBar, {
+//   shouldForwardProp: (prop) => prop !== "open",
+// })(({ theme, open }) => ({
+//   zIndex: theme.zIndex.drawer + 1,
+//   transition: theme.transitions.create(["width", "margin"], {
+//     easing: theme.transitions.easing.sharp,
+//     duration: theme.transitions.duration.leavingScreen,
+//   }),
+//   ...(open && {
+//     zIndex: theme.zIndex.drawer + 1,
+//     transition: theme.transitions.create(["width", "margin"], {
+//       easing: theme.transitions.easing.sharp,
+//       duration: theme.transitions.duration.enteringScreen,
+//     }),
+//   }),
+// }));
 
 export const PersistentDrawerRight = () => {
   const [open, setOpen] = useState(false);
@@ -89,72 +133,19 @@ export const PersistentDrawerRight = () => {
   const handleDrawerOpen = () => {
     setOpen(!open);
   };
-  const ItemMenuSectioSubscribe = [
-    { id: 1, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
-    { id: 2, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
-    { id: 3, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
-    { id: 4, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
-    { id: 5, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
-    { id: 6, text: "Kanał sportowy", icon: Avatrs.kanalsportowy },
-  ];
-
-  const ItemMenuFirstSection = [
-    { id: 1, text: "Główna", icon: <HomeIcon /> },
-    { id: 2, text: "Shorts", icon: <InboxIcon /> },
-    { id: 3, text: "Subskryubcje", icon: <SubscriptionsIcon /> },
-  ];
-  const ItemMenuSecondSection = [
-    { id: 1, text: "Biblioteka", icon: <LibraryMusicIcon /> },
-    { id: 2, text: "Histora", icon: <HistoryIcon /> },
-    { id: 3, text: "Twoje filmy", icon: <CameraIndoorOutlinedIcon /> },
-    { id: 4, text: "Do obejrzenia", icon: <WatchLaterOutlinedIcon /> },
-    { id: 5, text: "Twoje klipy", icon: <ContentCutOutlinedIcon /> },
-    { id: 6, text: "Polubione filmy", icon: <ThumbUpAltOutlinedIcon /> },
-    {
-      id: 7,
-      text: "CRQueue",
-      icon: <QueueMusicOutlinedIcon />,
-    },
-    {
-      id: 8,
-      text: "Moja",
-      icon: <QueueMusicOutlinedIcon />,
-    },
-    {
-      id: 9,
-      text: "Składanka",
-      icon: <SlowMotionVideoIcon />,
-    },
-  ];
 
   return (
     <>
-      <AppBar position="fixed" open={open}>
-        <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-          >
-            <MenuIcon />
-          </IconButton>
-        </Toolbar>
-      </AppBar>
+      <button onClick={() => handleDrawerOpen()} />
 
       <Box sx={{ display: "flex" }}>
         <SDrawer variant="permanent" open={open}>
           <DrawerHeader color="primary" />
           <Divider />
-          <List>
-            {ItemMenuFirstSection.map((item) => (
-              <ListItem key={item.id} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+          <MenuListDrawer
+            list={ItemMenuFirstSection}
+            displayMenuqtyStart={ItemMenuFirstSection.length}
+          />
 
           {open && (
             <>
@@ -165,12 +156,24 @@ export const PersistentDrawerRight = () => {
               />
               <Divider />
               <Typography variant="h5" padding={"10px"} textAlign={"left"}>
-                Subsktybcje
+                Subskrypcje
               </Typography>
-              <MenuListDrawer
-                list={ItemMenuSectioSubscribe}
-                displayMenuqtyStart={4}
-              />
+              <List>
+                {ItemMenuSectioSubscribe.map((item) => (
+                  <ListItem key={item.id} disablePadding>
+                    <ListItemButton>
+                      <ListItemIcon>
+                        <img
+                          src={item.icon}
+                          style={{ borderRadius: "50%", maxHeight: "25px" }}
+                        />
+                      </ListItemIcon>
+                      <ListItemText primary={item.text} />
+                    </ListItemButton>
+                  </ListItem>
+                ))}
+              </List>
+              <Divider />
             </>
           )}
         </SDrawer>

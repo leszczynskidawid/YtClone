@@ -1,11 +1,9 @@
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import KeyboardArrowUpIcon from "@mui/icons-material/KeyboardArrowUp";
-
+import { ListItemButtonShowMoreLess } from "./ListItemButtonShowMoreLess";
 import { useState } from "react";
 
 export const MenuListDrawer = ({ list, displayMenuqtyStart = 1 }) => {
@@ -31,28 +29,12 @@ export const MenuListDrawer = ({ list, displayMenuqtyStart = 1 }) => {
           </ListItemButton>
         </ListItem>
       ))}
-      <ListItemButtonShowMoreLess
-        showMore={showMore}
-        setShowMore={() => handleSetShowMoreOrLess()}
-      />
+      {list.length > displayMenuqtyStart && (
+        <ListItemButtonShowMoreLess
+          showMore={showMore}
+          setShowMore={() => handleSetShowMoreOrLess()}
+        />
+      )}
     </List>
-  );
-};
-export const ListItemButtonShowMoreLess = ({
-  showMore,
-  setShowMore,
-  children,
-}) => {
-  return (
-    <ListItemButton onClick={setShowMore}>
-      <ListItemIcon>
-        {showMore ? (
-          <KeyboardArrowDownIcon color="secondary" />
-        ) : (
-          <KeyboardArrowUpIcon />
-        )}
-      </ListItemIcon>
-      <ListItemText primary={"pokaz wiecej"} />
-    </ListItemButton>
   );
 };
