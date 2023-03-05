@@ -1,15 +1,13 @@
-import "./App.css";
+import React from "react";
+import { Theme } from "./Style/Theme";
 import { PersistentDrawerRight } from "./Drawer";
 import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <div className="App">
+    <Theme>
       <PersistentDrawerRight />
-
-      <button onClick={() => handle()} />
-    </div>
+    </Theme>
   );
 }
-
 export default App;
