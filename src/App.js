@@ -1,11 +1,16 @@
 import React from "react";
-import { Theme } from "./Style/Theme";
+import { Navbar } from "./Components/Navbar";
+import { theme } from "./Style/Theme";
+import { ThemeProvider } from "@mui/material";
+import AuthContextProvider from "./Context/AuthContext";
 
 const App = () => {
   return (
-    <Theme>
-      <div>hello world</div>
-    </Theme>
+    <AuthContextProvider>
+      <ThemeProvider theme={theme}>
+        <Navbar />
+      </ThemeProvider>
+    </AuthContextProvider>
   );
 };
 export default App;
