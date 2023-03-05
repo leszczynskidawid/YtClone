@@ -1,13 +1,18 @@
 import React from "react";
-import { Theme } from "./Style/Theme";
+import { Navbar } from "./Components/Navbar";
+import { theme } from "./Style/Theme";
+import { ThemeProvider } from "@mui/material";
+import AuthContextProvider from "./Context/AuthContext";
 import { PersistentDrawerRight } from "./Drawer";
-import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <Theme>
-      <PersistentDrawerRight />
-    </Theme>
+    <AuthContextProvider>
+      <ThemeProvider theme={theme}>
+        <Navbar />
+        <PersistentDrawerRight />
+      </ThemeProvider>
+    </AuthContextProvider>
   );
 }
 export default App;
