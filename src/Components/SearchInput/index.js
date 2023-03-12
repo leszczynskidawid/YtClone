@@ -5,8 +5,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import Box from "@mui/material/Box";
 import { IconButton } from "@mui/material";
 import { InputAdornment } from "@mui/material";
-import { styled } from "@mui/system";
-import { Borders, theme } from "../../Style/Theme";
+import { styled } from "@mui/material";
 
 const SearchInputContainer = styled(Box)`
   display: flex;
@@ -15,13 +14,14 @@ const SearchInputContainer = styled(Box)`
   max-width: 700px;
   overflow: hidden;
 `;
-const SearchButtonContainer = styled(Box)`
-  background-color: ${theme.palette.grey.main};
-  width: 5rem;
-  text-align: center;
-  border-radius: 0 ${Borders.borderRadius.normal} ${Borders.borderRadius.normal}
-    0;
-`;
+const SSearchiconButton = styled(IconButton)(({ theme }) => ({
+  border: "1px solid",
+  borderRadius: "0px 20px 20px 0px",
+  borderColor: theme.palette.secondary.main,
+  background: theme.palette.grey.main,
+  width: "5rem",
+  maxHeight: "40px",
+}));
 
 export const SearchInput = ({ matches, openSerchInput }) => {
   const [showClearIcon, setShowClearIcon] = useState(false);
@@ -53,15 +53,14 @@ export const SearchInput = ({ matches, openSerchInput }) => {
               ),
             }}
           />
-          <SearchButtonContainer>
-            <IconButton>
-              <SearchIcon color="primary" />
-            </IconButton>
-          </SearchButtonContainer>
+
+          <SSearchiconButton>
+            <SearchIcon fontSize="3rem" />
+          </SSearchiconButton>
         </SearchInputContainer>
       ) : (
         <IconButton onClick={openSerchInput}>
-          <SearchIcon color="primary" />
+          <SearchIcon />
         </IconButton>
       )}
     </>

@@ -5,7 +5,7 @@ import { NavbarDesktop } from "./NavbarDesktop";
 import { useEffect, useState } from "react";
 import { SarchNavbar } from "./SarchNavbar";
 
-export const Navbar = () => {
+export const Navbar = ({ openDrower }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("tablet"));
   const [active, setActive] = useState(true);
@@ -30,7 +30,7 @@ export const Navbar = () => {
           <SarchNavbar closeAction={() => handleOpenSearchNavabr()} />
         )
       ) : (
-        <NavbarDesktop matches={matches} />
+        <NavbarDesktop matches={matches} openDrower={openDrower} />
       )}
     </>
   );

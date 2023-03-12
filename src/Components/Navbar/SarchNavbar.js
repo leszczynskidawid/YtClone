@@ -7,7 +7,7 @@ export const SarchNavbar = ({ closeAction }) => {
   return (
     <AppBarContainer>
       <IconButton onClick={closeAction}>
-        <ArrowBackIcon color="primary" />
+        <ArrowBackIcon />
       </IconButton>
       <SearchInput />
     </AppBarContainer>

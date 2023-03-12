@@ -1,17 +1,16 @@
 import React from "react";
 import { Navbar } from "./Components/Navbar";
-import { theme } from "./Style/Theme";
-import { ThemeProvider } from "@mui/material";
 import AuthContextProvider from "./Context/AuthContext";
 import { PersistentDrawerRight } from "./Drawer";
+import ColorModeContextProvider from "./Context/modeContext";
+import { HomePage } from "./Page/HomePage";
 
 function App() {
   return (
     <AuthContextProvider>
-      <ThemeProvider theme={theme}>
-        <Navbar />
-        <PersistentDrawerRight />
-      </ThemeProvider>
+      <ColorModeContextProvider>
+        <HomePage />
+      </ColorModeContextProvider>
     </AuthContextProvider>
   );
 }

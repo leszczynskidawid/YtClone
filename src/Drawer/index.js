@@ -24,6 +24,7 @@ import QueueMusicOutlinedIcon from "@mui/icons-material/QueueMusicOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import SlowMotionVideoIcon from "@mui/icons-material/SlowMotionVideo";
 import { Avatrs } from "../assets/avatars/avatars";
+
 const ItemMenuSectioSubscribe = [
   { id: 1, text: "Kanał sportowy", icon: Avatrs.kanalsportowy, path: "/home" },
   { id: 2, text: "Wolski o wojnie", icon: Avatrs.wolski },
@@ -42,7 +43,11 @@ const ItemMenuSecondSection = [
   { id: 1, text: "Biblioteka", icon: <LibraryMusicIcon /> },
   { id: 2, text: "Histora", icon: <HistoryIcon /> },
   { id: 3, text: "Twoje filmy", icon: <CameraIndoorOutlinedIcon /> },
-  { id: 4, text: "Do obejrzenia", icon: <WatchLaterOutlinedIcon /> },
+  {
+    id: 4,
+    text: "Do obejrzenia",
+    icon: <WatchLaterOutlinedIcon />,
+  },
   { id: 5, text: "Twoje klipy", icon: <ContentCutOutlinedIcon /> },
   { id: 6, text: "Polubione filmy", icon: <ThumbUpAltOutlinedIcon /> },
   {
@@ -67,6 +72,7 @@ const drawerWidth = 240;
 const openedMixin = (theme) => ({
   width: drawerWidth,
   overflowX: "hidden",
+  border: "none",
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
@@ -75,6 +81,7 @@ const openedMixin = (theme) => ({
 
 const closedMixin = (theme) => ({
   overflowX: "hidden",
+  border: "none",
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up("tablet")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
@@ -89,42 +96,33 @@ const SDrawer = styled(Drawer, {
 })(({ theme, open }) => ({
   width: drawerWidth,
   flexShrink: 0,
-  whiteSpace: "nowrap",
 
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": openedMixin(theme),
-    marginTop: "90px",
   }),
   ...(!open && {
     ...closedMixin(theme),
     "& .MuiDrawer-paper": closedMixin(theme),
-    marginTop: "90px",
   }),
 }));
 const DrawerHeader = styled("div")(({ theme }) => ({
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "flex-end",
+  padding: theme.spacing(0, 1),
   ...theme.mixins.toolbar,
-  zIndex: theme.zIndex.drawer + 1,
 }));
-
-export const PersistentDrawerRight = () => {
-  const [open, setOpen] = useState(false);
-
-  const handleDrawerOpen = () => {
-    setOpen(!open);
-  };
-
+export const PersistentDrawerRight = ({ open }) => {
   return (
     <>
-      <button onClick={() => handleDrawerOpen()} />
       <Link to="/home" relative="path">
         Cancel
       </Link>
 
       <Box sx={{ display: "flex" }}>
         <SDrawer variant="permanent" open={open}>
-          <DrawerHeader color="primary" />
-          <Divider />
+          <DrawerHeader />
           <MenuListDrawer
             list={ItemMenuFirstSection}
             displayMenuqtyStart={ItemMenuFirstSection.length}
