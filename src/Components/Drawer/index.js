@@ -23,7 +23,7 @@ import ContentCutOutlinedIcon from "@mui/icons-material/ContentCutOutlined";
 import QueueMusicOutlinedIcon from "@mui/icons-material/QueueMusicOutlined";
 import ThumbUpAltOutlinedIcon from "@mui/icons-material/ThumbUpAltOutlined";
 import SlowMotionVideoIcon from "@mui/icons-material/SlowMotionVideo";
-import { Avatrs } from "../assets/avatars/avatars";
+import { Avatrs } from "../../assets/avatars/avatars";
 
 const ItemMenuSectioSubscribe = [
   { id: 1, text: "Kanał sportowy", icon: Avatrs.kanalsportowy, path: "/home" },
@@ -83,7 +83,7 @@ const closedMixin = (theme) => ({
   overflowX: "hidden",
   border: "none",
   width: `calc(${theme.spacing(7)} + 1px)`,
-  [theme.breakpoints.up("tablet")]: {
+  [theme.breakpoints.up("md")]: {
     width: `calc(${theme.spacing(8)} + 1px)`,
   },
   transition: theme.transitions.create("width", {
@@ -116,10 +116,6 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 export const PersistentDrawerRight = ({ open }) => {
   return (
     <>
-      <Link to="/home" relative="path">
-        Cancel
-      </Link>
-
       <Box sx={{ display: "flex" }}>
         <SDrawer variant="permanent" open={open}>
           <DrawerHeader />

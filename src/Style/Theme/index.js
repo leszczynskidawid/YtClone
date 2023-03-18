@@ -1,4 +1,4 @@
-import { amber, deepOrange, green, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 
 export const Colors = {
   powderWhite: "#FFFDF9",
@@ -70,16 +70,23 @@ export const getDesignTokens = (mode) => ({
           },
         }),
   },
-
-  breakpoints: {
-    values: {
-      mobile: 0,
-      tablet: 640,
-      laptop: 1024,
-      desktop: 1210,
-    },
-  },
   components: {
+    MuiButton: {
+      defaultProps: {
+        disableRipple: true,
+        disableElevation: true,
+      },
+      styleOverrides: {
+        root: {
+          border: "2px solid black",
+          background: "white",
+          ":hover": {
+            background: "transparent",
+          },
+        },
+      },
+    },
+
     MuiOutlinedInput: {
       styleOverrides: {
         root: {
@@ -121,68 +128,3 @@ export const getDesignTokens = (mode) => ({
     },
   },
 });
-
-// export const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: Colors.lightBlue,
-//     },
-//     secondary: {
-//       main: Colors.onyx,
-//     },
-//     error: {
-//       main: Colors.red,
-//     },
-//     info: {
-//       main: Colors.blue,
-//     },
-//     grey: {
-//       main: Colors.grey,
-//     },
-//   },
-
-//   components: {
-//     MuiButton: {
-//       defaultProps: {
-//         disableRipple: true,
-//         disableElevation: true,
-//       },
-//     },
-
-//     MuiInputAdornment: {
-//       styleOverrides: {
-//         root: {
-//           color: Colors.lightBlue,
-//         },
-//       },
-//     },
-//   },
-//   MuiPaper: {
-//     styleOverrides: {
-//       root: {
-//         "&::-webkit-scrollbar-thumb ": {
-//           color: Colors.red,
-//         },
-//       },
-//     },
-//   },
-
-//   breakpoints: {
-//     values: {
-//       mobile: 0,
-//       tablet: 640,
-//       laptop: 1024,
-//       desktop: 1200,
-//     },
-//   },
-// });
-
-// export const Borders = {
-//   border: {
-//     standartDarkMode: `.5px solid ${theme.palette.grey.main}`,
-//     standartligthMode: ` .5px solid ${theme.palette.secondary.main} `,
-//   },
-//   borderRadius: {
-//     normal: "20px",
-//   },
-// };

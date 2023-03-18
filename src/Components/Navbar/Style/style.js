@@ -1,5 +1,4 @@
 import { styled } from "@mui/system";
-import { Box } from "@mui/system";
 import { Toolbar } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 

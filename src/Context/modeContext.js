@@ -1,6 +1,6 @@
 import React from "react";
 import { getDesignTokens } from "../Style/Theme";
-import { createTheme } from "@mui/material";
+import { createTheme, Grid } from "@mui/material";
 import { useState, useEffect, createContext, useContext } from "react";
 import { ThemeProvider } from "@mui/material";
 
@@ -25,7 +25,7 @@ const ColorModeContextProvider = ({ children }) => {
     setStorageTheme(mode);
   }, [mode, storageTheme, theme]);
 
-  const value = { colorMode };
+  const value = { colorMode, theme };
 
   return (
     <ColorModeContextMyTheme.Provider value={value}>

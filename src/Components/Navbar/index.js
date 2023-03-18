@@ -7,7 +7,7 @@ import { SarchNavbar } from "./SarchNavbar";
 
 export const Navbar = ({ openDrower }) => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("tablet"));
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
   const [active, setActive] = useState(true);
   const handleOpenSearchNavabr = () => {
     setActive(!active);
