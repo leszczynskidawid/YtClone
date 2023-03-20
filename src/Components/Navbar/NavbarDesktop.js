@@ -9,6 +9,7 @@ import VideoCallIcon from "@mui/icons-material/VideoCall";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { IconButton } from "@mui/material";
 import { Avatar } from "@mui/material";
+import { CategorySelectionMenu } from "../CategorySelectionMenu";
 export const NavbarDesktop = ({ matches, openDrower }) => {
   const { token, LoginUserAction, logOut } = useAuth();
   return (

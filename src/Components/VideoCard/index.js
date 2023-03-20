@@ -11,7 +11,6 @@ const SCard = styled(Card)(({ theme }) => ({
   transitionDelay: "2s",
   maxWidth: "400px",
   boxShadow: "none",
-  // background: theme.palette.background.paper,
 }));
 
 export const VideoCard = ({

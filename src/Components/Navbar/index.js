@@ -4,6 +4,7 @@ import { NavbarMobile } from "./NavbarMobile";
 import { NavbarDesktop } from "./NavbarDesktop";
 import { useEffect, useState } from "react";
 import { SarchNavbar } from "./SarchNavbar";
+import { CategorySelectionMenu } from "../CategorySelectionMenu";
 
 export const Navbar = ({ openDrower }) => {
   const theme = useTheme();

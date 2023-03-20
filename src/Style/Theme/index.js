@@ -20,7 +20,7 @@ export const getDesignTokens = (mode) => ({
     ...(mode === "light"
       ? {
           primary: {
-            main: Colors.white,
+            main: Colors.black,
           },
           secondary: {
             main: grey[500],

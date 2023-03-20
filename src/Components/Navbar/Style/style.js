@@ -7,7 +7,7 @@ const AppBar = styled(MuiAppBar, {
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
   boxShadow: "none",
-  background: theme.palette.background.paper,
+  background: theme.palette.background.default,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
