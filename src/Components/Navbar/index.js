@@ -4,10 +4,11 @@ import { NavbarMobile } from "./NavbarMobile";
 import { NavbarDesktop } from "./NavbarDesktop";
 import { useEffect, useState } from "react";
 import { SarchNavbar } from "./SarchNavbar";
+import { CategorySelectionMenu } from "../CategorySelectionMenu";
 
-export const Navbar = () => {
+export const Navbar = ({ openDrower }) => {
   const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("tablet"));
+  const matches = useMediaQuery(theme.breakpoints.down("sm"));
   const [active, setActive] = useState(true);
   const handleOpenSearchNavabr = () => {
     setActive(!active);
@@ -30,7 +31,7 @@ export const Navbar = () => {
           <SarchNavbar closeAction={() => handleOpenSearchNavabr()} />
         )
       ) : (
-        <NavbarDesktop matches={matches} />
+        <NavbarDesktop matches={matches} openDrower={openDrower} />
       )}
     </>
   );

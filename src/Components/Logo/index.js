@@ -1,40 +1,23 @@
 import { Box } from "@mui/system";
-import YouTubeIcon from "@mui/icons-material/YouTube";
-import { styled, Typography } from "@mui/material";
-import { Colors } from "../../Style/Theme";
+import { styled, useTheme } from "@mui/material";
+import logoLigthMode from "../../assets/img/logoLight.png";
+import logoDarkMode from "../../assets/img/logoDark.png";
 
-const SLogoContainer = styled(Box)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin-left: 1rem;
-`;
 const ImageContainer = styled(Box)`
   position: relative;
   display: flex;
 `;
 
-const SBgroundColor = styled("div")({
-  backgroundColor: Colors.lightBlue,
-  position: "absolute",
-  width: "40%",
-  height: "25%",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  zIndex: "-999",
-});
-
 export const Logo = () => {
+  const theme = useTheme();
+
   return (
-    <SLogoContainer>
-      <ImageContainer>
-        <YouTubeIcon color="error" />
-        <SBgroundColor />
-      </ImageContainer>
-      <Typography variant="h6" color="primary">
-        YouTube
-      </Typography>
-    </SLogoContainer>
+    <ImageContainer>
+      <img
+        style={{ width: "150px" }}
+        src={theme.palette.mode === "dark" ? logoDarkMode : logoLigthMode}
+      />
+    </ImageContainer>
   );
 };
+``;

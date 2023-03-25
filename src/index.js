@@ -2,15 +2,21 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import { GlobalStyle } from "./Style/GlobalStyle/index";
 import { BrowserRouter } from "react-router-dom";
-import { GlobalStyle } from "./Style/GlobalStyle";
+import AuthContextProvider from "./Context/AuthContext";
+import ColorModeContextProvider from "./Context/modeContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <GlobalStyle />
     <BrowserRouter>
-      <App />
+      <AuthContextProvider>
+        <ColorModeContextProvider>
+          <App />
+        </ColorModeContextProvider>
+      </AuthContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

@@ -16,21 +16,21 @@ export const NavbarMobile = ({ matches, openSerchInput }) => {
   return (
     <AppBarContainer>
       <AppBarFragmentsContainer>
-        <MenuIcon color="primary" />
+        <MenuIcon />
         <Logo />
       </AppBarFragmentsContainer>
       <AppBarFragmentsContainer>
         {!token ? (
           <AppBarFragmentsContainer>
             <SearchInput matches={matches} openSerchInput={openSerchInput} />
-            <MoreVertIcon color="primary" />
+            <MoreVertIcon />
             <LoginButton action={() => LoginUserAction()} />
           </AppBarFragmentsContainer>
         ) : (
           <AppBarFragmentsContainer>
             <SearchInput matches={matches} openSerchInput={openSerchInput} />
-            <VideoCallIcon color="primary" />
-            <NotificationsNoneIcon color="primary" />
+            <VideoCallIcon />
+            <NotificationsNoneIcon />
             <IconButton onClick={() => logOut()}>
               <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
             </IconButton>

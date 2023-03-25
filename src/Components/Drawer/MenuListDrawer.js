@@ -5,7 +5,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { ListItemButtonShowMoreLess } from "./ListItemButtonShowMoreLess";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { styled } from "@mui/material/styles";
+const SListItemIcon = styled(ListItemIcon)(({ theme }) => ({
+  color: theme.palette.text.primary,
+}));
 
 export const MenuListDrawer = ({ list, displayMenuqtyStart = 1 }) => {
   const [showMore, setShowMore] = useState(false);
@@ -23,9 +26,9 @@ export const MenuListDrawer = ({ list, displayMenuqtyStart = 1 }) => {
   return (
     <List>
       {list?.slice(0, menuItems).map((item) => (
-        <ListItem key={item.id} disablePadding to={item.path} component={Link}>
+        <ListItem key={item.id} disablePadding to={item.path}>
           <ListItemButton>
-            <ListItemIcon>{item.icon}</ListItemIcon>
+            <SListItemIcon>{item.icon}</SListItemIcon>
             <ListItemText primary={item.text} />
           </ListItemButton>
         </ListItem>

@@ -9,25 +9,26 @@ import VideoCallIcon from "@mui/icons-material/VideoCall";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { IconButton } from "@mui/material";
 import { Avatar } from "@mui/material";
-export const NavbarDesktop = ({ matches }) => {
+import { CategorySelectionMenu } from "../CategorySelectionMenu";
+export const NavbarDesktop = ({ matches, openDrower }) => {
   const { token, LoginUserAction, logOut } = useAuth();
   return (
     <AppBarContainer>
       <AppBarFragmentsContainer>
-        <MenuIcon color="primary" />
+        <MenuIcon onClick={openDrower} />
         <Logo />
       </AppBarFragmentsContainer>
       <SearchInput matches={matches} />
 
       {!token ? (
         <AppBarFragmentsContainer>
-          <MoreVertIcon color="primary" />
+          <MoreVertIcon />
           <LoginButton action={() => LoginUserAction()} />
         </AppBarFragmentsContainer>
       ) : (
         <AppBarFragmentsContainer>
-          <VideoCallIcon color="primary" />
-          <NotificationsNoneIcon color="primary" />
+          <VideoCallIcon />
+          <NotificationsNoneIcon />
           <IconButton onClick={() => logOut()}>
             <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
           </IconButton>
