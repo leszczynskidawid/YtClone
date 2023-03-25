@@ -5,7 +5,17 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Avatar, IconButton, Paper, styled } from "@mui/material";
 import { Box } from "@mui/system";
-import { MoreVertOutlined } from "@mui/icons-material";
+import {
+  LocalConvenienceStoreOutlined,
+  MoreVertOutlined,
+} from "@mui/icons-material";
+import { useOpenMenu } from "../../Context/openMenuContext";
+import { PopupMenu } from "../PopupMenu";
+import { PopupMenuCard } from "../PopupMenu/PopupMenuCard/index";
+import { PopupMenuAccoutItems } from "../PopupMenu/PopupMenuAccout";
+import { useMenuOpenPop } from "../../Hooks/useMenuOpenPop";
+import { useState } from "react";
+
 const SCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
   transitionDelay: "2s",
@@ -21,7 +31,10 @@ export const VideoCard = ({
   displaysNumber,
   addedTime,
 }) => {
-  const [moreVertOpen, setMoreVertOpen] = React.useState(false);
+  const [moreVertOpen, setMoreVertOpen] = useState(false);
+
+  const [value] = useMenuOpenPop();
+  const { handleClose, handleClick, open, anchorEl } = value;
 
   return (
     <SCard
@@ -54,7 +67,16 @@ export const VideoCard = ({
             </Typography>
           </Box>
           <Box sx={{ position: "absolute", right: "10px", top: "10px" }}>
-            <IconButton>{moreVertOpen && <MoreVertOutlined />}</IconButton>
+            <IconButton onClick={handleClick}>
+              {moreVertOpen && <MoreVertOutlined />}
+            </IconButton>
+            <PopupMenu
+              open={value.open}
+              handleClose={handleClose}
+              handleClick={handleClick}
+              anchorEl={anchorEl}
+              children={<PopupMenuCard />}
+            />
           </Box>
         </CardContent>
       </div>

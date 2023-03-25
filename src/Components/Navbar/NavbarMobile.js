@@ -23,7 +23,7 @@ export const NavbarMobile = ({ matches, openSerchInput }) => {
         {!token ? (
           <AppBarFragmentsContainer>
             <SearchInput matches={matches} openSerchInput={openSerchInput} />
-            <MoreVertIcon onClick={() => console.log("more")} />
+            <MoreVertIcon />
             <LoginButton action={() => LoginUserAction()} />
           </AppBarFragmentsContainer>
         ) : (

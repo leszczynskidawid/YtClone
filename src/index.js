@@ -6,6 +6,7 @@ import { GlobalStyle } from "./Style/GlobalStyle/index";
 import { BrowserRouter } from "react-router-dom";
 import AuthContextProvider from "./Context/AuthContext";
 import ColorModeContextProvider from "./Context/modeContext";
+import OpenMenuContexProvider from "./Context/openMenuContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,7 +15,9 @@ root.render(
     <BrowserRouter>
       <AuthContextProvider>
         <ColorModeContextProvider>
-          <App />
+          <OpenMenuContexProvider>
+            <App />
+          </OpenMenuContexProvider>
         </ColorModeContextProvider>
       </AuthContextProvider>
     </BrowserRouter>

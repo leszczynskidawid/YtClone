@@ -27,7 +27,7 @@ const SIcon = styled(Icon)(({ theme }) => ({
   position: "absolute",
   right: "10px",
 }));
-export const MenuItemAccount = ({ icon, label, ...props }) => {
+export const PopupMenuItem = ({ icon, label, ...props }) => {
   return (
     <SMenuItem {...props}>
       <ListItemIcon>{icon}</ListItemIcon>
