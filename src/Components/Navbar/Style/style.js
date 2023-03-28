@@ -8,6 +8,7 @@ const AppBar = styled(MuiAppBar, {
   zIndex: theme.zIndex.drawer + 1,
   boxShadow: "none",
   background: theme.palette.background.default,
+  color: theme.palette.text.primary,
   transition: theme.transitions.create(["width", "margin"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -27,7 +28,7 @@ const AppBarContainer = styled(AppBar)`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 25px;
   min-height: 56px;
   gap: 0 20px;
 `;

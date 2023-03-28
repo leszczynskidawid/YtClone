@@ -9,13 +9,14 @@ import VideoCallIcon from "@mui/icons-material/VideoCall";
 import NotificationsNoneIcon from "@mui/icons-material/NotificationsNone";
 import { IconButton } from "@mui/material";
 import { Avatar } from "@mui/material";
-import { useOpenMenu } from "../../Context/openMenuContext";
 import { PopupMenu } from "../PopupMenu";
 import { PopupMenuAccoutItems } from "../PopupMenu/PopupMenuAccout";
+import { useMenuOpenPop } from "../../Hooks/useMenuOpenPop";
 
 export const NavbarDesktop = ({ matches, openDrower }) => {
   const { token, LoginUserAction, logOut } = useAuth();
-  const { open, anchorEl, handleClose, handleClick } = useOpenMenu();
+  const [value] = useMenuOpenPop();
+  const { open, anchorEl, handleClick, handleClose } = value;
 
   return (
     <AppBarContainer>
@@ -31,7 +32,6 @@ export const NavbarDesktop = ({ matches, openDrower }) => {
           <PopupMenu
             open={open}
             handleClose={handleClose}
-            handleClick={handleClick}
             anchorEl={anchorEl}
             children={<PopupMenuAccoutItems />}
           />

@@ -1,4 +1,4 @@
-import { Grid, Box, Avatar, Typography } from "@mui/material";
+import { Grid, Box, Avatar, Typography, Paper } from "@mui/material";
 import { Link } from "react-router-dom";
 
 export const HeaderMenuAccount = () => {
