@@ -141,7 +141,7 @@ export const PopupMenuAccoutItems = () => {
       id: 11,
       label: "Skróty klawiszowe",
       icon: <Settings />,
-      action: (id) => console.log(id),
+      action: () => {},
       hasDivder: true,
     },
     {
