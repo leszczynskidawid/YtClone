@@ -12,11 +12,12 @@ import { Avatar } from "@mui/material";
 import { PopupMenu } from "../PopupMenu";
 import { PopupMenuAccoutItems } from "../PopupMenu/PopupMenuAccout";
 import { useMenuOpenPop } from "../../Hooks/useMenuOpenPop";
+import { ACCOUT_MENU_ID } from "../PopupMenu/Constants/IdPopupMenu";
 
 export const NavbarDesktop = ({ matches, openDrower }) => {
   const { token, LoginUserAction, logOut } = useAuth();
   const [value] = useMenuOpenPop();
-  const { open, anchorEl, handleClick, handleClose } = value;
+  const { open, anchorEl, handleClick, handleCloseMenu, type } = value;
 
   return (
     <AppBarContainer>
@@ -28,10 +29,16 @@ export const NavbarDesktop = ({ matches, openDrower }) => {
 
       {!token ? (
         <AppBarFragmentsContainer>
-          <MoreVertIcon onClick={handleClick} />
+          <MoreVertIcon
+            onClick={(e) => handleClick(e, ACCOUT_MENU_ID)}
+            aria-controls={open ? ACCOUT_MENU_ID : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+          />
           <PopupMenu
-            open={open}
-            handleClose={handleClose}
+            id={ACCOUT_MENU_ID}
+            open={open && type === ACCOUT_MENU_ID}
+            handleClose={handleCloseMenu}
             anchorEl={anchorEl}
             children={<PopupMenuAccoutItems />}
           />

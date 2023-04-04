@@ -5,46 +5,34 @@ import Logout from "@mui/icons-material/Logout";
 import { PopupMenuItem } from "../PopupMenuItem";
 import { useColorModeContex } from "../../../Context/modeContext";
 import { useMenuOpenPop } from "../../../Hooks/useMenuOpenPop";
-import { PopupMenu } from "..";
-import {
-  KeyboardArrowLeft,
-  KeyboardDoubleArrowDown,
-} from "@mui/icons-material";
-import { Divider } from "@mui/material";
+import { Anchor, KeyboardArrowLeft } from "@mui/icons-material";
+import DoneIcon from "@mui/icons-material/Done";
 
 export const PopupMenuAccoutItems = () => {
   const [value] = useMenuOpenPop();
-  const {
-    open,
-    anchorEl,
-    handleClick,
-    handleClose,
-    handleOpenSubMenu,
-    handleCloseSubMenu,
-    submenu,
-    submenuItems,
-  } = value;
+  const { handleOpenSubMenu, handleCloseMenu, submenu, submenuItems } = value;
 
   const { colorMode } = useColorModeContex();
 
-  // const openSubMenu = (component) => {
-  //   if (!submenu) {
-  //     return (
-  //       <>
-  //         <PopupMenuItem
-  //           label={"Uzyj trybu urządzenia "}
-  //           onClick={handleCloseSubMenu}
-  //         />
-  //         <PopupMenuItem label={"Jasny"} onClick={handleCloseSubMenu} />
-  //         <PopupMenuItem label={"Ciemny"} onClick={handleCloseSubMenu} />
-  //       </>
-  //     );
-  //   }
-  // };
-
   const SubMenuModeColor = [
-    { id: 1, label: "ciemny" },
-    { id: 2, label: "jasny" },
+    {
+      id: 1,
+      label: "jasny",
+      action: () => {
+        colorMode.toggleColorMode(true);
+        handleCloseMenu();
+      },
+      icon: localStorage.getItem("theme") !== "dark" ? <DoneIcon /> : null,
+    },
+    {
+      id: 2,
+      label: "ciemny",
+      action: () => {
+        colorMode.toggleColorMode(false);
+        handleCloseMenu();
+      },
+      icon: localStorage.getItem("theme") !== "light" ? <DoneIcon /> : null,
+    },
   ];
   const SubMenuLanguage = [
     { id: 1, label: "aangielski" },
@@ -61,13 +49,6 @@ export const PopupMenuAccoutItems = () => {
     { id: 12, label: "niemiecki " },
     { id: 13, label: "aangielski" },
     { id: 14, label: "niemiecki " },
-
-    { id: 15, label: "aangielski" },
-    { id: 16, label: "niemiecki " },
-    { id: 17, label: "aangielski" },
-    { id: 18, label: "niemiecki " },
-    { id: 19, label: "aangielski" },
-    { id: 20, label: "niemiecki " },
   ];
 
   const PopupMenuAccoutItemsArray = [
@@ -75,13 +56,13 @@ export const PopupMenuAccoutItems = () => {
       id: 1,
       label: "Twój kannał",
       icon: <Settings />,
-      action: () => handleOpenSubMenu(SubMenuModeColor),
+      action: () => handleCloseMenu(),
     },
     {
       id: 2,
       label: "YouTube Studio",
       icon: <PersonAdd />,
-      action: () => {},
+      action: () => handleCloseMenu(),
     },
     {
       id: 3,
@@ -114,7 +95,7 @@ export const PopupMenuAccoutItems = () => {
       id: 7,
       label: "Wygląd",
       icon: <Settings />,
-      action: () => {},
+      action: () => handleOpenSubMenu(SubMenuModeColor),
       hasSubmenu: true,
     },
     {
@@ -167,10 +148,9 @@ export const PopupMenuAccoutItems = () => {
 
   return (
     <>
-      {submenu ? (
+      {!submenu ? (
         <>
           <HeaderMenuAccount />
-
           {PopupMenuAccoutItemsArray.map((items) => (
             <PopupMenuItem
               key={items.id}
@@ -185,15 +165,18 @@ export const PopupMenuAccoutItems = () => {
       ) : (
         <>
           <PopupMenuItem
-            label={"asdasd"}
+            label={"Wyglad"}
             icon={<KeyboardArrowLeft />}
-            onClick={handleCloseSubMenu}
+            onClick={handleCloseMenu}
           />
-          {submenuItems.map((item) => (
-            <PopupMenuItem key={item.id} label={item.label} />
+          {submenuItems.map((item, index) => (
+            <PopupMenuItem
+              key={item.id}
+              label={item.label}
+              onClick={item.action}
+              icon={item.icon}
+            />
           ))}
-
-          <Divider />
         </>
       )}
     </>

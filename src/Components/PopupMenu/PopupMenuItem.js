@@ -6,7 +6,7 @@ import KeyboardArrowRightIcon from "@mui/icons-material/KeyboardArrowRight";
 import { Icon } from "@mui/material";
 import { styled } from "@mui/system";
 
-const SMenuItem = styled(MenuItem)(({ theme, switchedTo }) => ({
+const SMenuItem = styled(MenuItem)(({ theme }) => ({
   padding: "20px 30px",
   fontSize: "20px",
   maxWidth: "400px",
@@ -26,6 +26,7 @@ export const PopupMenuItem = ({
   label,
   hasSubmenu = false,
   hasDivder = false,
+
   ...props
 }) => {
   return (

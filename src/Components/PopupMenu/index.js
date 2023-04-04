@@ -1,4 +1,3 @@
-import { Padding } from "@mui/icons-material";
 import Menu from "@mui/material/Menu";
 import { styled } from "@mui/system";
 
@@ -8,12 +7,14 @@ const SMenu = styled(Menu)(({ theme }) => ({
   },
 }));
 
-export const PopupMenu = ({ anchorEl, handleClose, open, children }) => {
+export const PopupMenu = ({ id, anchorEl, handleClose, open, children }) => {
   return (
     <SMenu
+      id={id}
       anchorEl={anchorEl}
       open={open}
       onClose={handleClose}
+      aria-haspopup="true"
       PaperProps={{
         sx: {
           overflow: "auto",

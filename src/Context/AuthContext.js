@@ -10,7 +10,12 @@ const AuthContextProvider = ({ children }) => {
   };
   const logOut = () => setToken(false);
 
-  const value = { token, setToken, logOut, LoginUserAction };
+  const value = {
+    token,
+    setToken,
+    logOut,
+    LoginUserAction,
+  };
 
   return <authContext.Provider value={value}> {children}</authContext.Provider>;
 };

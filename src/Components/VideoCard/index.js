@@ -1,16 +1,16 @@
 import * as React from "react";
+import { useState } from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { Avatar, IconButton, Paper, styled } from "@mui/material";
 import { Box } from "@mui/system";
-import {
-  LocalConvenienceStoreOutlined,
-  MoreVertOutlined,
-} from "@mui/icons-material";
-import { useState } from "react";
+import { MoreVertOutlined } from "@mui/icons-material";
 import { useMenuOpenPop } from "../../Hooks/useMenuOpenPop";
+import { PopupMenu } from "../PopupMenu";
+import { PopupMenuCard } from "../PopupMenu/PopupMenuCard";
+import { VIDEO_CARD_MEDNU_ID } from "../PopupMenu/Constants/IdPopupMenu";
 
 const SCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
@@ -29,7 +29,7 @@ export const VideoCard = ({
 }) => {
   const [moreVertOpen, setMoreVertOpen] = useState(false);
   const [value] = useMenuOpenPop();
-  const { open, anchorEl, handleClick, handleClose } = value;
+  const { open, anchorEl, handleClick, handleCloseMenu, type } = value;
 
   return (
     <SCard
@@ -62,9 +62,21 @@ export const VideoCard = ({
             </Typography>
           </Box>
           <Box sx={{ position: "absolute", right: "10px", top: "10px" }}>
-            <IconButton onClick={handleClick}>
+            <IconButton
+              onClick={(e) => handleClick(e, VIDEO_CARD_MEDNU_ID)}
+              aria-controls={open ? VIDEO_CARD_MEDNU_ID : undefined}
+              aria-haspopup="true"
+              aria-expanded={open ? "true" : undefined}
+            >
               {moreVertOpen && <MoreVertOutlined />}
             </IconButton>
+            <PopupMenu
+              id={VIDEO_CARD_MEDNU_ID}
+              open={open && type === VIDEO_CARD_MEDNU_ID}
+              handleClose={handleCloseMenu}
+              anchorEl={anchorEl}
+              children={<PopupMenuCard />}
+            />
           </Box>
         </CardContent>
       </div>

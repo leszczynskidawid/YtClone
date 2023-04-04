@@ -1,36 +1,43 @@
 import { useState } from "react";
 
-export const useMenuOpenPop = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
-  const [submenu, setSubmenu] = useState(true);
-  const [submenuItems, setSubmenuItem] = useState([]);
+import { useOpenMenuAnchorElContext } from "../Context/menuOpenContex";
 
+export const useMenuOpenPop = () => {
+  const [submenu, setSubmenu] = useState(false);
+  const [submenuItems, setSubmenuItem] = useState([]);
+  const { changeAnchorEl, anchorEl } = useOpenMenuAnchorElContext();
+  const [type, setType] = useState("");
   const open = Boolean(anchorEl);
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget);
+
+  const handleClick = (event, type) => {
+    changeAnchorEl(event.currentTarget);
+    setType(type);
   };
-  const handleClose = () => {
-    setAnchorEl(null);
-    setSubmenu(false);
+  const handleCloseMenu = () => {
+    changeAnchorEl(null);
+    setType("");
   };
 
   const handleOpenSubMenu = (items) => {
-    setSubmenu(false);
+    setSubmenu(true);
     setSubmenuItem(items);
-    if (!submenu) {
+
+    if (submenu) {
       return submenuItems;
     }
   };
   const handleCloseSubMenu = () => {
-    setSubmenu(true);
+    setSubmenu(false);
   };
+
   const value = {
     open,
     anchorEl,
     handleClick,
-    handleClose,
     handleOpenSubMenu,
     handleCloseSubMenu,
+    handleCloseMenu,
+    type,
     submenu,
     submenuItems,
   };
