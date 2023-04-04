@@ -7,13 +7,17 @@ import { ThemeProvider } from "@mui/material";
 const ColorModeContextMyTheme = createContext();
 
 const ColorModeContextProvider = ({ children }) => {
-  const storage = typeof window !== "undefined" ? localStorage.theme : "light";
+  const themeLocalStorageKey = localStorage.getItem("theme").toLowerCase();
+  const storage = ["light", "dark"].includes(themeLocalStorageKey)
+    ? themeLocalStorageKey
+    : "light";
+
   const [mode, setMode] = React.useState(storage);
   const [storageTheme, setStorageTheme] = useState(storage);
   const colorMode = React.useMemo(
     () => ({
-      toggleColorMode: () => {
-        setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
+      toggleColorMode: (isDark = false) => {
+        setMode(isDark ? "light" : "dark");
       },
     }),
     []
