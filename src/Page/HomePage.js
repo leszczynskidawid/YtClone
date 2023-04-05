@@ -5,7 +5,7 @@ import { useState } from "react";
 
 import { VideoCard } from "../Components/VideoCard";
 import { CategorySelectionMenu } from "../Components/CategorySelectionMenu";
-import { display } from "@mui/system";
+import { useApi } from "../Hooks/useApi";
 
 export const HomePage = () => {
   const [openDrowerState, setOpenDrowerState] = useState(false);
@@ -112,6 +112,14 @@ export const HomePage = () => {
     },
   ];
 
+  const apikey = "AIzaSyAHrLXKBf04opIhcAWHNVpaSv2iDBFKXhU";
+  const { data, error } = useApi(
+    `/videos?part=snippet%2CcontentDetails%2Cstatistics&id=wr3VmbZdVA4&key=${apikey}`
+  );
+  const array = data.items;
+
+  array?.map((card) => console.log(card.snippet));
+
   return (
     <Paper elevation={0}>
       <Box
@@ -136,15 +144,15 @@ export const HomePage = () => {
           >
             <CategorySelectionMenu />
           </Grid>
-          {videoCardsArray.map((card) => (
+          {array?.map((card) => (
             <Grid item xs={12} sm={10} md={5} lg={3} xl={3} key={card.id}>
               <VideoCard
-                image={card.image}
-                avatar={card.avatar}
-                titleFilm={card.titleFilm}
-                canalName={card.canalName}
-                displaysNumber={card.displaysNumber}
-                addedTime={card.addedTime}
+                image={card.snippet.thumbnails.standard.url}
+                // avatar={data.items[0].snippet.title}
+                titleFilm={card.snippet.title}
+                canalName={card.snippet.channelTitle}
+                displaysNumber={card.statistics.viewCount}
+                addedTime={card.snippet.publishedAt}
               />
             </Grid>
           ))}

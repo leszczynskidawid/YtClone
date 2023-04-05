@@ -11,6 +11,7 @@ import { useMenuOpenPop } from "../../Hooks/useMenuOpenPop";
 import { PopupMenu } from "../PopupMenu";
 import { PopupMenuCard } from "../PopupMenu/PopupMenuCard";
 import { VIDEO_CARD_MEDNU_ID } from "../PopupMenu/Constants/IdPopupMenu";
+import { useApi } from "../../Hooks/useApi";
 
 const SCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
@@ -51,7 +52,10 @@ export const VideoCard = ({
             </Avatar>
           </Box>
           <Box>
-            <Typography variant="h6" sx={{ wordBreak: "break-word" }}>
+            <Typography
+              variant="h6"
+              sx={{ wordBreak: "break-word", marginLeft: "20px" }}
+            >
               {titleFilm}
             </Typography>
             <Typography variant="body2" color="text.secondary">
