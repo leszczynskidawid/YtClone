@@ -1,11 +1,12 @@
 import { Navbar } from "../Components/Navbar";
 import { PersistentDrawerRight } from "../Components/Drawer/index";
 import { Box, Grid, Paper, Typography } from "@mui/material";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { VideoCard } from "../Components/VideoCard";
 import { CategorySelectionMenu } from "../Components/CategorySelectionMenu";
 import { useApi } from "../Hooks/useApi";
+import { endpoints } from "../Constants/Endpoints/getEnpoins";
 
 export const HomePage = () => {
   const [openDrowerState, setOpenDrowerState] = useState(false);
@@ -112,13 +113,18 @@ export const HomePage = () => {
     },
   ];
 
-  const apikey = "AIzaSyAHrLXKBf04opIhcAWHNVpaSv2iDBFKXhU";
-  const { data, error } = useApi(
-    `/videos?part=snippet%2CcontentDetails%2Cstatistics&id=wr3VmbZdVA4&key=${apikey}`
+  const { data, loading, fetchData, error } = useApi();
+  const [selectedCategoryName, setSelectedCategoryName] = useState(
+    endpoints.GET_MOST_POPULAR_VIDEO_PL
   );
-  const array = data.items;
 
-  array?.map((card) => console.log(card.snippet));
+  useEffect(() => {
+    fetchData(selectedCategoryName);
+  }, [selectedCategoryName]);
+
+  const handleChange = (event, newValue) => {
+    setSelectedCategoryName(newValue);
+  };
 
   return (
     <Paper elevation={0}>
@@ -127,12 +133,18 @@ export const HomePage = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: "11px 100px",
+          margin: "50px",
         }}
       >
         <Navbar openDrower={() => setOpenDrowerState(!openDrowerState)} />
         <PersistentDrawerRight open={openDrowerState} />
-        <Grid container spacing={2}>
+
+        <Grid
+          container
+          columnSpacing={2}
+          rowSpacing={2}
+          justifyContent={"center"}
+        >
           <Grid
             item
             xs={12}
@@ -142,18 +154,14 @@ export const HomePage = () => {
               zIndex: 999,
             }}
           >
-            <CategorySelectionMenu />
+            <CategorySelectionMenu
+              handleChange={handleChange}
+              selectedCategoryName={selectedCategoryName}
+            />
           </Grid>
-          {array?.map((card) => (
-            <Grid item xs={12} sm={10} md={5} lg={3} xl={3} key={card.id}>
-              <VideoCard
-                image={card.snippet.thumbnails.standard.url}
-                // avatar={data.items[0].snippet.title}
-                titleFilm={card.snippet.title}
-                canalName={card.snippet.channelTitle}
-                displaysNumber={card.statistics.viewCount}
-                addedTime={card.snippet.publishedAt}
-              />
+          {data.items?.map((cardData) => (
+            <Grid item key={cardData.id}>
+              <VideoCard data={cardData} loading={loading} />
             </Grid>
           ))}
         </Grid>

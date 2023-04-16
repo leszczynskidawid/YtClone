@@ -6,6 +6,8 @@ import Box from "@mui/material/Box";
 import { IconButton } from "@mui/material";
 import { InputAdornment } from "@mui/material";
 import { styled } from "@mui/material";
+// import { apiClient } from "../../Helpers/apiClient";
+// import { useApi } from "../../Hooks/useApi";
 
 const SearchInputContainer = styled(Box)`
   display: flex;
@@ -26,9 +28,18 @@ const SSearchiconButton = styled(IconButton)(({ theme }) => ({
 export const SearchInput = ({ matches, openSerchInput }) => {
   const [showClearIcon, setShowClearIcon] = useState(false);
   const [isFous, setIsFocus] = useState(false);
+  // const [searchInputValue, setSearchInputValue] = useState("");
+
   const handleChange = (e) => {
     setShowClearIcon(e.target.value === "" ? false : true);
+    // setSearchInputValue(e.target.value);
   };
+  // const { data, loading, fetchData, error } = useApi();
+  // const search = () => {
+  //   fetchData(`search?part=snippet&q=${searchInputValue}&maxResults=12 `);
+  //   console.log(searchInputValue);
+  //   console.log(data);
+  // };
 
   return (
     <>
@@ -37,7 +48,7 @@ export const SearchInput = ({ matches, openSerchInput }) => {
           <BasicInput
             placeholder={"szukaj"}
             type={"text"}
-            onChange={handleChange}
+            onChange={(e) => handleChange(e)}
             onFocus={() => setIsFocus(true)}
             onBlur={() => setIsFocus(false)}
             InputProps={{

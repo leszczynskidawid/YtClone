@@ -3,19 +3,28 @@ import React, { useState } from "react";
 import { Tabs, Tab } from "@mui/material";
 import { Box } from "@mui/system";
 import { styled } from "@mui/material";
+import { endpoints } from "../../Constants/Endpoints/getEnpoins";
+
+const { ANIMALS, MUSIC, GAMES, SHORTS, TRAVELS, SPORTS, PEOPLE } =
+  endpoints.GET_CATEGORIES_FILM;
 
 const arrayTabsvalue = [
-  { id: 1, value: "Wszystko", label: "wszystko" },
-  { id: 2, value: "Palylisty YouTube Mix", label: "YouTube" },
-  { id: 3, value: "Muzyka", label: "Muzyka" },
-  { id: 4, value: "Gry", label: "Gry" },
-  { id: 5, value: "Na żywo", label: "Na żywo" },
-  { id: 6, value: "Koszykóka", label: "Koszykóka" },
-  { id: 7, value: "Rapowanie ", label: "Rapowanie" },
-  { id: 8, value: "Piłka nożna", label: "Piłka nożna" },
-  { id: 9, value: "Osatnio przesłane", label: "Osatnio przesłane" },
-  { id: 10, value: "Obejrzane", label: "Obejrzane" },
-  { id: 11, value: "Nowe rekmoendacje", label: "Nowe rekmoendacje" },
+  { id: 1, value: endpoints.GET_MOST_POPULAR_VIDEO_PL, label: "wszystko" },
+  {
+    id: 2,
+    value: ANIMALS,
+    label: "Zwierzęta domowe",
+  },
+  { id: 3, value: MUSIC, label: "Muzyka" },
+  { id: 4, value: GAMES, label: "Gry" },
+  { id: 5, value: SHORTS, label: "NEWS" },
+  { id: 6, value: TRAVELS, label: "Podróże" },
+  { id: 7, value: SPORTS, label: "Piłka nożna" },
+  {
+    id: 8,
+    value: PEOPLE,
+    label: "edukacja",
+  },
 ];
 
 const STab = styled(Tab)(({ theme }) => ({
@@ -23,7 +32,6 @@ const STab = styled(Tab)(({ theme }) => ({
   margin: " 0 12px",
   background: theme.palette.grey.main,
   color: theme.palette.text.primary,
-
   borderRadius: "10px",
 }));
 const STabs = styled(Tabs)(({ theme }) => ({
@@ -43,31 +51,27 @@ const STabs = styled(Tabs)(({ theme }) => ({
   },
 }));
 
-export const CategorySelectionMenu = () => {
-  const [value, setValue] = React.useState(0);
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
+export const CategorySelectionMenu = ({
+  selectedCategoryName,
+  handleChange,
+}) => {
   return (
     <Box
       sx={{
-        maxWidth: "100%",
         bgcolor: "background.default",
-        margin: "25px 0px",
+        margin: "25px 40px",
         padding: "20px ",
       }}
     >
       <STabs
-        value={value}
+        value={selectedCategoryName}
         onChange={handleChange}
         variant="scrollable"
         allowScrollButtonsMobile
         scrollButtons="auto"
       >
         {arrayTabsvalue.map((tab) => (
-          <STab key={tab.id} label={tab.label} />
+          <STab key={tab.id} label={tab.label} value={tab.value} />
         ))}
       </STabs>
     </Box>
