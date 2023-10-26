@@ -1,116 +1,111 @@
 import { Navbar } from "../Components/Navbar";
 import { PersistentDrawerRight } from "../Components/Drawer/index";
-import { Box, Grid, Paper, Typography } from "@mui/material";
-import { useState } from "react";
-
+import { Box, CircularProgress, Grid, Paper, Typography } from "@mui/material";
+import { useEffect, useState, useRef } from "react";
 import { VideoCard } from "../Components/VideoCard";
 import { CategorySelectionMenu } from "../Components/CategorySelectionMenu";
-import { display } from "@mui/system";
+import { useApi } from "../Hooks/useApi";
+import { endpoints } from "../Constants/Endpoints/getEnpoins";
 
 export const HomePage = () => {
   const [openDrowerState, setOpenDrowerState] = useState(false);
+  const { loading, fetchData, error, data } = useApi();
+  const [videos, setVideos] = useState([]);
+  const [pageToken, setPageToken] = useState(null);
+  const [selectedCategoryName, setSelectedCategoryName] = useState(
+    endpoints.GET_MOST_POPULAR_VIDEO_PL
+  );
+  const [secondLoader, setSecondLoader] = useState(false);
 
-  const videoCardsArray = [
-    {
-      id: 1,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-    {
-      id: 2,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-    {
-      id: 3,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-    {
-      id: 4,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-    {
-      id: 5,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-    {
-      id: 6,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-    {
-      id: 7,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-    {
-      id: 8,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-    {
-      id: 9,
-      image:
-        "https://i.ytimg.com/vi/SXiSVQZLje8/hqdefault.jpg?s…RUAAIhCGAE=&rs=AOn4CLBCvsan61FMyGcO5mvoXyOwyA9O7Q",
-      avatar:
-        "https://yt3.ggpht.com/ytc/AL5GRJU8oz44HeW3bqRYW9dcoCSwqdLd0M7VsqZjHJZMyA=s68-c-k-c0x00ffffff-no-rj",
-      titleFilm: "Street Workers",
-      canalName: "Bortez Live",
-      displaysNumber: 1.5,
-      addedTime: 1,
-    },
-  ];
+  const observerRef = useRef();
+
+  const fetchVideoData = async () => {
+    try {
+      setSecondLoader(true);
+      const response = await fetchData(
+        `${selectedCategoryName}&pageToken=${pageToken || " "}`
+      );
+
+      const videoItems = response;
+
+      const videoData = await Promise.all(
+        videoItems.items.map(async (item) => {
+          const channelId = item.snippet.channelId;
+
+          const channelResponse = await fetchData(
+            `${endpoints.GET_VIDEO_BY_ID_CHANNEL}&id=${channelId}`
+          );
+
+          const channelItem = channelResponse.items[0];
+
+          return {
+            videoId: item.id,
+            channelId: item.snippet.channelId,
+            title: item.snippet.title,
+            videoImage: item.snippet.thumbnails.high.url,
+            channelTitle: channelItem.snippet.title,
+            channelImage: channelItem.snippet.thumbnails.default.url,
+            publishDate: item.snippet.publishedAt,
+            viewCount: item.statistics.viewCount,
+            likeCount: item.statistics.likeCount,
+            dislikeCount: item.statistics.dislikeCount,
+            commentCount: item.statistics.commentCount,
+          };
+        })
+      );
+
+      if (selectedCategoryName !== endpoints.GET_MOST_POPULAR_VIDEO_PL) {
+        setVideos(videoData);
+      } else {
+        setVideos((prevVideos) => [...prevVideos, ...videoData]);
+      }
+
+      setPageToken(videoItems.nextPageToken);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setSecondLoader(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchVideoData();
+  }, [selectedCategoryName]);
+
+  const handleObserverIntersection = (entries) => {
+    const [entry] = entries;
+    if (
+      entry.isIntersecting &&
+      entry.intersectionRatio > 0 &&
+      pageToken &&
+      !loading &&
+      entry.boundingClientRect.top >= 0
+    ) {
+      fetchVideoData();
+    }
+  };
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(handleObserverIntersection, {
+      root: null,
+      rootMargin: "10px",
+      threshold: 0.1,
+    });
+
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
+
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [pageToken, loading, observerRef]);
+
+  const handleChange = (event, newValue) => {
+    setSelectedCategoryName(newValue);
+  };
 
   return (
     <Paper elevation={0}>
@@ -119,12 +114,18 @@ export const HomePage = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          padding: "11px 100px",
+          margin: "50px",
         }}
       >
         <Navbar openDrower={() => setOpenDrowerState(!openDrowerState)} />
         <PersistentDrawerRight open={openDrowerState} />
-        <Grid container spacing={2}>
+
+        <Grid
+          container
+          columnSpacing={2}
+          rowSpacing={2}
+          justifyContent={"center"}
+        >
           <Grid
             item
             xs={12}
@@ -134,22 +135,34 @@ export const HomePage = () => {
               zIndex: 999,
             }}
           >
-            <CategorySelectionMenu />
+            <CategorySelectionMenu
+              handleChange={handleChange}
+              selectedCategoryName={selectedCategoryName}
+            />
           </Grid>
-          {videoCardsArray.map((card) => (
-            <Grid item xs={12} sm={10} md={5} lg={3} xl={3} key={card.id}>
+
+          {videos?.map((cardData) => (
+            <Grid item key={cardData.id}>
               <VideoCard
-                image={card.image}
-                avatar={card.avatar}
-                titleFilm={card.titleFilm}
-                canalName={card.canalName}
-                displaysNumber={card.displaysNumber}
-                addedTime={card.addedTime}
+                vidoCardDetailsData={cardData}
+                loading={secondLoader}
               />
             </Grid>
           ))}
         </Grid>
       </Box>
+      {loading && (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+          }}
+        >
+          <CircularProgress />
+        </Box>
+      )}
+
+      <div ref={observerRef} style={{ height: "1px", color: "red" }}></div>
     </Paper>
   );
 };
