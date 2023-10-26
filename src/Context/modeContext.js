@@ -7,7 +7,8 @@ import { ThemeProvider } from "@mui/material";
 const ColorModeContextMyTheme = createContext();
 
 const ColorModeContextProvider = ({ children }) => {
-  const themeLocalStorageKey = localStorage.getItem("theme").toLowerCase();
+  const themeLocalStorageKey = localStorage.getItem("theme");
+
   const storage = ["light", "dark"].includes(themeLocalStorageKey)
     ? themeLocalStorageKey
     : "light";

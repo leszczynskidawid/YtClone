@@ -60,7 +60,6 @@ export const CategorySelectionMenu = ({
       sx={{
         bgcolor: "background.default",
         margin: "25px 40px",
-        padding: "20px ",
       }}
     >
       <STabs

@@ -11,7 +11,8 @@ import MenuOpenAnchorElProvider from "./Context/menuOpenContex";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
+  <>
     <GlobalStyle />
     <BrowserRouter>
       <AuthContextProvider>
@@ -22,7 +23,8 @@ root.render(
         </ColorModeContextProvider>
       </AuthContextProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  </>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

@@ -14,6 +14,7 @@ import { VIDEO_CARD_MEDNU_ID } from "../PopupMenu/Constants/IdPopupMenu";
 import Skeleton from "@mui/material/Skeleton";
 import moment from "moment/moment";
 import "moment/locale/pl";
+import { useNavigate } from "react-router-dom";
 
 const SCard = styled(Card)(({ theme }) => ({
   borderRadius: 20,
@@ -25,17 +26,29 @@ const SCard = styled(Card)(({ theme }) => ({
   boxShadow: "none",
 }));
 
-export const VideoCard = ({ data, loading }) => {
+export const VideoCard = ({ vidoCardDetailsData, loading }) => {
   const [moreVertOpen, setMoreVertOpen] = useState(false);
   const [value] = useMenuOpenPop();
   const { open, anchorEl, handleClick, handleCloseMenu, type } = value;
-  const { title, channelTitle, publishedAt, thumbnails } = data.snippet;
-  const { viewCount } = data.statistics;
+
+  const naviagate = useNavigate();
+  const {
+    channelImage,
+    channelTitle,
+    title,
+    likeCount,
+    publishDate,
+    viewCount,
+    videoImage,
+    videoId,
+    channelId,
+  } = vidoCardDetailsData;
 
   return (
     <SCard
       onMouseOver={() => setMoreVertOpen(true)}
       onMouseOut={() => setMoreVertOpen(false)}
+      onClick={() => naviagate(`/${videoId}`)}
     >
       <div>
         {loading ? (
@@ -51,7 +64,7 @@ export const VideoCard = ({ data, loading }) => {
               width: "100%",
             }}
             component="img"
-            image={thumbnails.standard.url}
+            image={videoImage}
             alt="green iguana"
           />
         )}
@@ -72,9 +85,7 @@ export const VideoCard = ({ data, loading }) => {
                 height={50}
               />
             ) : (
-              <Avatar>
-                <img src={null} />
-              </Avatar>
+              <Avatar src={channelImage} />
             )}
           </Box>
           <Box sx={{ marginRight: "20px" }}>
@@ -103,7 +114,7 @@ export const VideoCard = ({ data, loading }) => {
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {viewCount} wyświetlen {"* "}
-                  {moment(publishedAt).startOf("hour").fromNow()}
+                  {moment(publishDate).startOf("hour").fromNow()}
                 </Typography>
               </>
             )}

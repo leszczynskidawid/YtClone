@@ -32,7 +32,8 @@ export const getDesignTokens = (mode) => ({
             main: Colors.blue,
           },
           grey: {
-            main: grey[200],
+            main: grey[300],
+            ligthGrey: grey[100],
           },
           background: {
             default: Colors.white,
@@ -59,6 +60,7 @@ export const getDesignTokens = (mode) => ({
           },
           grey: {
             main: grey[800],
+            ligthGrey: grey[900],
           },
           background: {
             default: Colors.black,
@@ -78,11 +80,8 @@ export const getDesignTokens = (mode) => ({
       },
       styleOverrides: {
         root: {
-          border: "2px solid black",
-          background: "white",
-          ":hover": {
-            background: "transparent",
-          },
+          borderRadius: "25px",
+          padding: "2px 10px",
         },
       },
     },
